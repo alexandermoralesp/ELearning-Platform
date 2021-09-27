@@ -4,18 +4,19 @@ from flask.helpers import url_for
 
 from werkzeug.utils import redirect
 
-jkorp = Flask(__name__)
+clientPath = os.path.abspath("client/html")
 
-#Conseguir cache de paginas estaticas
+jkorp = Flask(__name__, template_folder=clientPath)
+
+#Renderizar paginas estaticas
 def getCache():
-    paths = glob.glob("server/templates/*.html")
+    paths = glob.glob("client/html/*.html")
     cacheDict = dict()
     #Para que el render_template funcione 
     with jkorp.app_context():
         for p in paths:
             base =  os.path.basename(p)
             cacheDict[base] = render_template(base)
-            render_template(base)
     return cacheDict
 Cache = getCache()
 
