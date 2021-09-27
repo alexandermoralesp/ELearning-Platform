@@ -12,7 +12,7 @@ jkorp = Flask(__name__, template_folder=clientPath)
 def getCache():
     paths = glob.glob("client/html/*.html")
     cacheDict = dict()
-    #Para que el render_template funcione 
+    #Para que el render_template funcione sin un route
     with jkorp.app_context():
         for p in paths:
             base =  os.path.basename(p)
