@@ -39,4 +39,4 @@ def register():
         return redirect(url_for("register"))
 
 if __name__ == "__main__":
-    jkorp.run(debug=True)
+    jkorp.run(host='0.0.0.0',debug=True, port=25565)
