@@ -1,6 +1,8 @@
-from flask import Flask 
-from flask import render_template
+from flask import Flask, render_template, request
 import glob, os.path
+from flask.helpers import url_for
+
+from werkzeug.utils import redirect
 
 jkorp = Flask(__name__)
 
@@ -8,6 +10,7 @@ jkorp = Flask(__name__)
 def getCache():
     paths = glob.glob("server/templates/*.html")
     cacheDict = dict()
+    #Para que el render_template funcione 
     with jkorp.app_context():
         for p in paths:
             base =  os.path.basename(p)
@@ -17,10 +20,13 @@ def getCache():
 Cache = getCache()
 
 #Definir login handler
-@jkorp.route("/login")
+@jkorp.route("/login", methods=["GET", "POST"])
 def login():
-    return Cache["login.html"]
-
+    if request.method=="GET":
+        return Cache["login.html"]
+    else:
+        print(request.form.get("test"))
+        return redirect(url_for("login"))
 
 if __name__ == "__main__":
     jkorp.run(debug=True)
