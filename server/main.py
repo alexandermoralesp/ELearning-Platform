@@ -28,5 +28,14 @@ def login():
         print(request.form.get("test"))
         return redirect(url_for("login"))
 
+#Registrarse
+@jkorp.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method=="GET":
+        return Cache["register.html"]
+    else:
+        print(request.form.get("test"))
+        return redirect(url_for("register"))
+
 if __name__ == "__main__":
     jkorp.run(debug=True)
