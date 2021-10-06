@@ -28,7 +28,6 @@ def login():
     else:
         print(request.form.get("test"))
         return redirect(url_for("login"))
-
 #Registrarse
 @jkorp.route("/register", methods=["GET", "POST"])
 def register():
