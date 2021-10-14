@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@200&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+body {
+    display: flex;
+    margin: 0px;
+    min-height: 845px;
+}
+
+.body-left {
+    flex: 1;
+    background-color: rgb(139, 12, 12);
+    background-image: url("Rectangle\ 4.png");
+}
+
+.body-right {
+    flex: 3;
+    background-color: rgb(255, 255, 255);
+}
+
+input {
+    padding: 10px;
+    border-radius: 2px;
+    margin: 10px;
+    margin-left: 100px;
+    width: 250px;
+    margin-right: 0px;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: rgba(160, 35, 56, 0.911);;
+}
+
+input[type=checkbox] {
+    width: auto;
+}
+
+#google {
+    display:block;
+    border: none;
+    background: url('google login.jfif') no-repeat bottom;
+    background-size: 270px 56px;
+    margin-left: -550px;
+}
+
+label {
+    margin-left: 100px;
+}
+
+a {
+    color: rgb(28, 155, 187);
+    text-decoration: none;
+}
+
+a:hover {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 14px;
+    margin-left: 100px;
+}

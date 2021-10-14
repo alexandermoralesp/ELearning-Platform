@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/registerstylesheet.css"/>
+    </head>
     <body>
+        <div class="body-left"></div>
+        <div class="body-right">
+            <img src="img/JKorp.png" width="250" height="auto" alt="JKorp Logo" style="margin-left: 100px;">
+            <h1 style="margin-left: 100px;">Create your account</h1>
+            <a id="google" href="#"><br> <br> <br></a> <br>
         <form action="/register", method="POST">
+            <label for="nombre">Nombre</label> <br>
             <input type="text" name="nombre" id="nombre" placeholder="Nombre"><br>
+            <label for="apellido">Apellido</label> <br>
             <input type="text" name="apellido" id="apellido" placeholder="Apellido"><br>
+            <label for="user">Usuario</label> <br>
             <input type="text" name="user" id="user" placeholder="Usuario"><br>
-            <input type="password" name="pass" id="pass" placeholder="Contraseña" minlength="7"><br>
+            <label for="pass">Password</label> <br>
+            <input type="password" name="pass" id="pass" placeholder="Password" minlength="7"><br>
+            <input type="checkbox" id="terms">
+            <label for="terms" style="margin-left: 5px; font-size: 14px;">He leido y acepto los 
+                <a href="#">Terminos de privacidad</a></label> <br>
             <input type="submit" value="Crear cuenta">
         </form>
+        <br>
+        <h3>Have an account? <a href="#">Log in!</a></h3>
+        </div>
     </body>
 </html>
