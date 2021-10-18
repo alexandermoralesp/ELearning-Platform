@@ -15,7 +15,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']  = False
 app.config['SECRET_KEY'] = 'JKORP2021'
 
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
 
 oauth = OAuth(app)
 google = oauth.register(
@@ -109,15 +108,6 @@ def signup():
 
     return render_template("signup.html", user=current_user)
 
-
-""" @app.route("/gmailauth")
-def googleauth():
-    google = oauth.create_client("google")
-    token = google.authorize_access_token()  
-    resp = google.get('userinfo')  
-    user_info = resp.json()
-    user = oauth.google.userinfo()
-    return redirect("/") """
 @app.route("/gmailauth")
 def googleauth():
     redirect_uri = url_for('authorize', _external=True)
@@ -125,13 +115,9 @@ def googleauth():
 
 @app.route("/authorize")
 def authorize():
-    #google = oauth.create_client("google")
-
-    #token = google.authorize_access_token() 
     token = oauth.google.authorize_access_token() 
     resp = oauth.google.get('userinfo')  
     user_info = resp.json()
-    # user = oauth.google.userinfo()
     print(user_info)
     return redirect("/")
 
