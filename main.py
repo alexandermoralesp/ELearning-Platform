@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask.helpers import url_for
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,14 +6,29 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate   
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager
 from sqlalchemy import func
+from authlib.integrations.flask_client import OAuth, oauth_registry
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost:5432/jkorp"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']  = False
+
 app.config['SECRET_KEY'] = 'JKORP2021'
 
 db = SQLAlchemy(app)
 # migrate = Migrate(app, db)
+
+oauth = OAuth(app)
+google = oauth.register(
+    name = 'google',
+    client_id="1071814098669-idi49ailgbvnlgsjgavarnoqa4skuaa8.apps.googleusercontent.com",
+    client_secret="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",
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    client_kwargs={'scope': 'openid email profile'}
+)
 
 lg_manager = LoginManager(app)
 @lg_manager.user_loader
@@ -41,6 +56,7 @@ def home():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -93,6 +109,31 @@ def signup():
 
     return render_template("signup.html", user=current_user)
 
+
+""" @app.route("/gmailauth")
+def googleauth():
+    google = oauth.create_client("google")
+    token = google.authorize_access_token()  
+    resp = google.get('userinfo')  
+    user_info = resp.json()
+    user = oauth.google.userinfo()
+    return redirect("/") """
+@app.route("/gmailauth")
+def googleauth():
+    redirect_uri = url_for('authorize', _external=True)
+    return oauth.google.authorize_redirect(redirect_uri)
+
+@app.route("/authorize")
+def authorize():
+    #google = oauth.create_client("google")
+
+    #token = google.authorize_access_token() 
+    token = oauth.google.authorize_access_token() 
+    resp = oauth.google.get('userinfo')  
+    user_info = resp.json()
+    # user = oauth.google.userinfo()
+    print(user_info)
+    return redirect("/")
 
 if __name__ =="__main__":
     app.run(debug=True)
