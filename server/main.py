@@ -1,3 +1,4 @@
+#ESTE ARCHIVO SE DEBE INICIAR DESDE JKORP/ (Ex. python server/main.py)
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask.helpers import url_for
 from werkzeug.utils import redirect
@@ -7,8 +8,10 @@ from flask_migrate import Migrate
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager
 from sqlalchemy import func
 from authlib.integrations.flask_client import OAuth, oauth_registry
+import os
 
-app = Flask(__name__)
+root_path = os.getcwd()
+app = Flask(__name__, static_folder=root_path+"\\client\\static", template_folder=root_path+"\\client\\templates")
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost:5432/jkorp"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']  = False
 
