@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Notas</h1>
+<ul class="list-group list-group-flush" id="notes"></ul>
+
+</ul>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Añadir Nota</button>
+  </div>
+</form>
+{% endblock %}
