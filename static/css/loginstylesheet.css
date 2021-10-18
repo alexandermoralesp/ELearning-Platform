@@ -11,6 +11,7 @@
 html, body {
     display: flex;
     min-height: 100vh;
+    background-color: seashell;
 }
 
 img {
@@ -37,7 +38,7 @@ img {
 }
 
 .left button {
-    margin-top: 350px;
+    /* margin-top: 350px; */
     margin-bottom: 30px;
     margin-left: 8px;
 }
