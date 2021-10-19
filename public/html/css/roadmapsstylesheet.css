@@ -73,24 +73,24 @@ img {
 	padding-right: 10px;
     padding-left: 10px;
 	margin: auto;
-    height: 150px;
+    height: 3em;
 }
 
 .main-header .container {
 	display: flex;
-	align-items: center;
 	justify-content: space-around;
 	flex-wrap: wrap;
-    height: 140px;
+    height: 3em;
 }
 
 .main-nav ul {
-	margin: 1em -2em .5em;
+	margin: 0em -2em .5em;
 	text-align: center;
+    margin-top: 5px;
 }
 
 .main-nav li {
-    height: 100px;
+    height: 0em;
 	display: inline;
 }
 
