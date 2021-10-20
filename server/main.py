@@ -71,7 +71,7 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged In!', category='success')
-                login_user(user, remember=True)
+                # login_user(user, remember=True)
                 session["profile"] = {"fname":user.first_name, "email": user.email}
                 session.permanent = True
                 return redirect("/")
@@ -98,22 +98,23 @@ def signup():
         user = Usuario.query.filter_by(email=email).first() ## se inicia un query para encontrar y aliar al usuario con el correo
         if user:
             flash('Este correo ya existe', category='error')
-        elif len(email) < 4:
-            flash('Correo amerita ser mas largo que 3 caracteres. Invalido', category='error')
-        elif len(first_name) < 2:
-            flash('Nombre Invalido', category='error')
         elif password1 != password2:
             flash('Contraseñas no son iguales', category='error')
-        elif len(password1) < 7:
-            flash('Clave ingresada es invalida, debe ser mayor a 7 caracteres', category='error')
         else:
             new_user = Usuario(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
-            db.session.add(new_user) ## se genera el usuario si se pasan todas las pruebas/protocolos
-            db.session.commit()
-            login_user(new_user, remember=True)
+            print(new_user)
+            try:
+                db.session.add(new_user) ## se genera el usuario si se pasan todas las pruebas/protocolos
+                db.session.commit()
+            except:
+                db.session.rollback()
+                print(sys.exc_info)
+            finally:
+                db.session.close()
+            # login_user(new_user, remember=True)
             flash('Cuenta creada!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect("/")
 
     return render_template("signup.html", user=current_user)
 
