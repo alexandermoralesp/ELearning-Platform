@@ -1,6 +1,7 @@
 #ESTE ARCHIVO SE DEBE INICIAR DESDE JKORP/ (Ex. python server/main.py)
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, session
 from flask.helpers import url_for
+from sqlalchemy.orm import backref
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -38,28 +39,57 @@ lg_manager = LoginManager(app)
 def load_user(id):
     return Usuario.query.get(int(id))
 
-class Note(db.Model):
+class Cursando(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id')) ## siendo relacionada a user se puede acceder a sus variables
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id')) 
+    id_curso = db.Column(db.Integer, db.ForeignKey('curso.id'))
+
+class Curso(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(40), nullable = False)
+    descripcion = db.Column(db.String(200), nullable = False)
+    creador_id = db.Column(db.Integer, db.ForeignKey('usuario.id')) 
+    alumno = db.relationship('Cursando', backref="curso") 
 
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    # notes = db.relationship('Note') ## crea una relacion con notes.
+    curso = db.relationship('Curso', backref="usuario") 
+    cursando = db.relationship('Cursando', backref="usuario")  
 
 db.create_all(app=app)
 
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    hayUsuario = session.get('profile')
+        
+    return render_template("index.html", hayUsuario = hayUsuario)
 
-@app.route("/roadmaps")
+@app.route("/roadmaps", methods=['GET', 'POST'])
 def roadmaps():
-    return render_template("roadmaps.html")
+    hayUsuario = session.get('profile')
+    if request.method == 'POST':
+        title = request.form.get("title")
+        description = request.form.get("description")
+        id_creador = (Usuario.query.filter_by(email=session["profile"]["email"]).first()).id
+        crs = Curso(
+            titulo = title, descripcion=description, creador_id=id_creador
+        )
+        print(Curso.descripcion)
+        try:
+            db.session.add(crs) 
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
+        return redirect("/roadmaps")
+    courses = Curso.query.all()
+    return render_template("roadmaps.html", courses = courses, tamano = len(courses), hayUsuario = hayUsuario)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -73,6 +103,7 @@ def login():
                 flash('Logged In!', category='success')
                 # login_user(user, remember=True)
                 session["profile"] = {"fname":user.first_name, "email": user.email}
+                print(session["profile"])
                 session.permanent = True
                 return redirect("/")
             else:
@@ -82,10 +113,12 @@ def login():
     return render_template("login.html", user=current_user)
 
 @app.route("/logout")
-@login_required ## todas las funciones relacionadas a un usuario en especifico necestan login_requiered para relacionarlo a sus propiedades
+# @login_required ## todas las funciones relacionadas a un usuario en especifico necestan login_requiered para relacionarlo a sus propiedades
 def logout():
-    logout_user()
-    return redirect(url_for("/"))
+    # logout_user()
+    for idS in list(session.keys()):
+        session.pop(idS)
+    return redirect("/")
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -141,6 +174,8 @@ def authorize():
         print(sys.exc_info)
     finally:
         db.session.close()
+    session["profile"] = user_info
+
 
     return redirect("/")
 
