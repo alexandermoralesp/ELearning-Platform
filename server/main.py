@@ -161,19 +161,22 @@ def authorize():
     token = oauth.google.authorize_access_token() 
     resp = oauth.google.get('userinfo')  
     user_info = resp.json()
-    obj = Usuario(
-        email = user_info["email"],
-        password=generate_password_hash(user_info["id"], method='sha256'),
-        first_name = user_info["given_name"]
-    )
-    try:
-        db.session.add(obj)
-        db.session.commit()
-    except:
-        db.session.rollback()
-        print(sys.exc_info)
-    finally:
-        db.session.close()
+    
+    user = Usuario.query.filter_by(email=user_info["email"]).first()
+    if not user:
+        obj = Usuario(
+            email = user_info["email"],
+            password=generate_password_hash(user_info["id"], method='sha256'),
+            first_name = user_info["given_name"]
+        )
+        try:
+            db.session.add(obj)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
     session["profile"] = user_info
 
 
