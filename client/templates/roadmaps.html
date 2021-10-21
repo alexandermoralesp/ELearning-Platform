@@ -64,7 +64,13 @@
                     <p>
                         {{courses[i].descripcion}}
                     </p>
-                    {% if hayUsuario %}
+                    {% if hayUsuario and courses[i].creador_id==idUsuario %}
+                    <form action ="/removeCourse" method="post">
+                        <input type ="hidden" id="cid" name="cid" value="{{courses[i].id}}">
+                        <input type = "submit" value="Remove Course">
+                    </form>
+                    
+                    {% elif hayUsuario %}
                     <a href="#">Join</a>
                     {% else %}
                     

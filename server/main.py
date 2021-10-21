@@ -75,6 +75,7 @@ def desktop():
 @app.route("/roadmaps", methods=['GET', 'POST'])
 def roadmaps():
     hayUsuario = session.get('profile')
+    idUsuario = session.get('user_id')
     if request.method == 'POST':
         title = request.form.get("title")
         description = request.form.get("description")
@@ -82,7 +83,6 @@ def roadmaps():
         crs = Curso(
             titulo = title, descripcion=description, creador_id=id_creador
         )
-        print(Curso.descripcion)
         try:
             db.session.add(crs) 
             db.session.commit()
@@ -93,28 +93,42 @@ def roadmaps():
             db.session.close()
         return redirect("/roadmaps")
     courses = Curso.query.all()
-    return render_template("roadmaps.html", courses = courses, tamano = len(courses), hayUsuario = hayUsuario)
+    return render_template("roadmaps.html", courses = courses, tamano = len(courses), hayUsuario = hayUsuario, idUsuario = idUsuario)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-
+    errorS = None
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         user = Usuario.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged In!', category='success')
+                errorS = 'Logged In!'
                 session["profile"] = {"name":user.first_name, "email": user.email}
                 session["user_id"] = (Usuario.query.filter_by(email=email).first()).id
-                print(session["profile"])
                 session.permanent = True
                 return redirect("/")
             else:
-                flash('Contraseña Incorrecta.', category='error')
+                errorS = 'Contraseña Incorrecta.'
         else:
-            flash('El correo ingresado no existe', category='error')
-    return render_template("login.html", user=current_user)
+            errorS = 'El correo ingresado no existe'
+    return render_template("login.html", user=current_user, errorS=errorS)
+
+@app.route("/removeCourse", methods=['GET', 'POST'])
+def removeCourse():
+    if request.method=="POST":
+        course_id = request.form.get("cid")
+        try:
+            Curso.query.filter_by(id=course_id).delete()
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
+        
+    return redirect("/roadmaps")
 
 @app.route("/logout")
 def logout():

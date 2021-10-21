@@ -52,6 +52,9 @@
         />
       <!-- <button type="submit" class="button btn btn-primary">Login</button> -->
       <button type="submit" class="button">Login</button>
+      {% if errorS != None %}
+          <h4 style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;{{errorS}}</h4>
+        {% endif %}
     </form>
     <button class="button">
       <a href="/signup"
