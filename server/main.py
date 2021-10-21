@@ -39,17 +39,17 @@ lg_manager = LoginManager(app)
 def load_user(id):
     return Usuario.query.get(int(id))
 
-class Cursando(db.Model):
+""" class Cursando(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuario.id')) 
-    id_curso = db.Column(db.Integer, db.ForeignKey('curso.id'))
+    id_curso = db.Column(db.Integer, db.ForeignKey('curso.id')) """
 
 class Curso(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(40), nullable = False)
     descripcion = db.Column(db.String(200), nullable = False)
     creador_id = db.Column(db.Integer, db.ForeignKey('usuario.id')) 
-    alumno = db.relationship('Cursando', backref="curso") 
+    # alumno = db.relationship('Cursando', backref="curso") 
 
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +57,7 @@ class Usuario(db.Model):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     curso = db.relationship('Curso', backref="usuario") 
-    cursando = db.relationship('Cursando', backref="usuario")  
+    # cursando = db.relationship('Cursando', backref="usuario")  
 
 db.create_all(app=app)
 
@@ -67,6 +67,10 @@ def home():
     hayUsuario = session.get('profile')
         
     return render_template("index.html", hayUsuario = hayUsuario)
+
+@app.route("/desktop")
+def desktop():
+    return render_template("desktop.html")
 
 @app.route("/roadmaps", methods=['GET', 'POST'])
 def roadmaps():
@@ -101,7 +105,6 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged In!', category='success')
-                # login_user(user, remember=True)
                 session["profile"] = {"fname":user.first_name, "email": user.email}
                 print(session["profile"])
                 session.permanent = True
@@ -113,9 +116,7 @@ def login():
     return render_template("login.html", user=current_user)
 
 @app.route("/logout")
-# @login_required ## todas las funciones relacionadas a un usuario en especifico necestan login_requiered para relacionarlo a sus propiedades
 def logout():
-    # logout_user()
     for idS in list(session.keys()):
         session.pop(idS)
     return redirect("/")
@@ -145,7 +146,6 @@ def signup():
                 print(sys.exc_info)
             finally:
                 db.session.close()
-            # login_user(new_user, remember=True)
             flash('Cuenta creada!', category='success')
             return redirect("/")
 
