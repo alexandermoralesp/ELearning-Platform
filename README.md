@@ -38,15 +38,7 @@
 ## **2. Modelo relacional:**
 ### Tablas entidad:
 - Usuario
-- Roadmaps
 - Cursos
-- Secciones
-- Estudiantes
-- Docentes
-- Exámenes
-### Tablas de relacion entre entidades:
-- Curso_Progreso()
-- Alumno_Curso_Examen()
 
 ____________________
 
@@ -60,7 +52,10 @@ ____________________
 - Mateo Nasse
 
 ## **3. Descripción:**
-- Plataforma E-Learning online...
+- Debido a los efectos de la pandemia durante los años 2020, el sector educativo se topó con la necesidad de digitalizar todos sus medios.
+Desde que aparecieron plataformas online educativas como Udemy, Coursera, Platzi y entre otras más, la demanda estudiantil cada vez es mayor
+en las plataformas digitales. Es por ello que en el presente proyecto buscamos implementar una plataforma para una empresa llamada JKorp enfocada
+en el servicios de cursos digitales enfocados en la empresa Oracle.
 
 ## **4. Objetivos Principales / Misión / Visión:**
 - Lorem ipsum...
@@ -77,26 +72,8 @@ ____________________
 ### **5.2 Base de Datos:**
 - ...
 
-## **6. Script a ejecutar para iniciar la base de datos con datos:**
-- ...
-
-## **7. Referencia de API:**
-- ...
-
-## **8. Hosts:**
-- ...
-
-## **9. Forma de Autenticación:**
-- ...
-
-## **10. Objetivos Principales / Misión / Visión:**
-- ...
-
-## **11. Manejo de errores:**
-- ...
-
-## **12. Información acerca de los requests y response de cada endpoint utilizado en el sistema:**
-- ...
-
-## **13. Como ejecutar el sistema (Deployment Scripts):**
-- ...
+## **6. Script a ejecutar para iniciar la aplicación:**
+- Ejecutar en la terminal
+```shell
+python ./run.py
+```
