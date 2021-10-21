@@ -20,9 +20,8 @@ en las plataformas digitales. Es por ello que en el presente proyecto buscamos i
 en el servicios de cursos digitales enfocados en la empresa Oracle.
 
 ## **4. Objetivos Principales / Misión / Visión:**
-- Lorem ipsum...
-- Lorem ipsum...
-- Lorem ipsum...
+- Misión: Plataforma educativa de cursos enfocados en una tecnología
+- Visión: Ser la principal plataforma educativa en latinoamérica
 
 ## **5. Informacion acerca de las tecnologías utilizadas en Front-end, Back-end, y Base de datos:**
 ### **5.1 Front-end:**
