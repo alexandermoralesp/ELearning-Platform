@@ -124,6 +124,7 @@ def logout():
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
+    errorS = None
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
@@ -132,13 +133,12 @@ def signup():
 
         user = Usuario.query.filter_by(email=email).first() ## se inicia un query para encontrar y aliar al usuario con el correo
         if user:
-            flash('Este correo ya existe', category='error')
+            errorS = 'Este correo ya existe'
         elif password1 != password2:
-            flash('Contraseñas no son iguales', category='error')
+            errorS = 'Contraseñas no son iguales'
         else:
             new_user = Usuario(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
-            print(new_user)
             try:
                 db.session.add(new_user) ## se genera el usuario si se pasan todas las pruebas/protocolos
                 db.session.commit()
@@ -147,10 +147,10 @@ def signup():
                 print(sys.exc_info)
             finally:
                 db.session.close()
-            flash('Cuenta creada!', category='success')
+            errorS = 'Cuenta creada!'
             return redirect("/")
 
-    return render_template("signup.html", user=current_user)
+    return render_template("signup.html", user=current_user, errorS = errorS)
 
 @app.route("/gmailauth")
 def googleauth():
