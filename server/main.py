@@ -105,7 +105,8 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged In!', category='success')
-                session["profile"] = {"fname":user.first_name, "email": user.email}
+                session["profile"] = {"name":user.first_name, "email": user.email}
+                session["user_id"] = (Usuario.query.filter_by(email=email).first()).id
                 print(session["profile"])
                 session.permanent = True
                 return redirect("/")
@@ -178,6 +179,7 @@ def authorize():
         finally:
             db.session.close()
     session["profile"] = user_info
+    session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
 
 
     return redirect("/")
