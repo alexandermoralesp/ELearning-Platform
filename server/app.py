@@ -20,6 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']  = False
 app.config['SECRET_KEY'] = 'JKORP2021'
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 oauth = OAuth(app)
 google = oauth.register(
@@ -59,7 +60,7 @@ class Usuario(db.Model):
     curso = db.relationship('Curso', backref="usuario") 
     # cursando = db.relationship('Cursando', backref="usuario")  
 
-db.create_all(app=app)
+# db.create_all(app=app)
 
 
 @app.route("/")
