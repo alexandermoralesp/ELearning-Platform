@@ -1,26 +1,27 @@
-# ESTE ARCHIVO SE DEBE INICIAR DESDE JKORP/ (Ex. python server/main.py)
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, session
+# ESTE ARCHIVO SE DEBE INICIAR DESDE JKORP/ (Ex. python backend/main.py)
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from flask.helpers import url_for
 from sqlalchemy.orm import backref
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import login_user, login_required, logout_user, current_user, LoginManager
-from sqlalchemy import func
-from authlib.integrations.flask_client import OAuth, oauth_registry
+from flask_migrate import Migrate, init
+from flask_login import current_user, LoginManager
+from authlib.integrations.flask_client import OAuth
 import os
 import sys
 
 root_path = os.getcwd()
-app = Flask(__name__, static_folder=root_path + "\\client\\static", template_folder=root_path + "\\client\\templates")
+static_path = root_path + "\\frontend\\static"
+template_path = root_path + "\\frontend\\templates"
+app = Flask(__name__, static_folder=static_path, template_folder=template_path)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost:5432/jkorp"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['SECRET_KEY'] = 'JKORP2021'
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db, directory="data")
+migrate = Migrate(app, db)
 
 oauth = OAuth(app)
 google = oauth.register(
