@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="static/icon/logo.ico" type="image/x-icon" />
+    <title>JKORP: Sign-Up</title>
+    <link rel="stylesheet" type="text/css" href="static/css/signupstylesheet.css"/>
+  </head>
+  <body>
+
+    
+
+    <div class="body-left"></div>
+    <div class="body-right">
+      <a href ="/"><img src="static/img/JKorp.png" width="170" height="95" alt="JKorp Logo"></a>
+      <form method="POST">
+        <h3>Crea tu cuenta</h3>
+        
+        <div class="form-group">
+          <label for="email">Correo Electronico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Ingresar Correo"
+          >
+        </div>
+        <div class="form-group">
+          <label for="firstName">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="Ingresar Nombre"
+            minlength="2"
+          >
+        </div>
+        <div class="form-group">
+          <label for="password1">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password1"
+            name="password1"
+            placeholder="Ingresar Contraseña"
+            minlength="8"
+          >
+        </div>
+        <div class="form-group">
+          <label for="password2">Re Ingresar Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password2"
+            name="password2"
+            placeholder="Re Ingresar Contraseña"
+            minlength="8"
+          >
+        </div>
+        <br />
+        <button type="submit">Aceptar</button>
+        {% if errorS != None %}
+          <h4 style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;{{errorS}}</h4>
+        {% endif %}
+      </form>
+    </div>
+  </body> 
+</html>

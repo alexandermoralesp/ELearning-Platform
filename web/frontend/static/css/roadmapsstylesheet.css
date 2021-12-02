@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@200&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.main {
+    font-family: 'Red Hat Display', sans-serif;
+    color: black;
+    background-color: rgb(248, 248, 242);
+    padding-bottom: 40px;
+}
+
+.main h1 {
+    margin-left: 160px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.main h2 {
+    padding-top: 20px;
+    margin-left: 160px;
+    width: 100%;
+    height: 30px;
+    color: rgb(114, 17, 17);
+}
+
+.main-division {
+    margin-right: 100px;
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-division div {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow: rgb(116, 116, 116) 5px 10px;
+    border-radius: 20px;
+    width: 200px;
+    max-width: 200px;
+}
+
+.main-division p {
+    color: black;
+    font-size: 10px;
+    font-family: 'Saira', sans-serif;
+}
+
+.main-division a {
+    color: rgb(8, 8, 128);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.container {
+    width: 1200px;
+	max-width: 100%;
+	padding-right: 10px;
+    padding-left: 10px;
+	margin: auto;
+    height: 5em;
+}
+
+.main-header .container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+    height: 5em;
+}
+
+.main-nav ul {
+	margin: 0em -2em .5em;
+	text-align: center;
+    margin-top: 5px;
+}
+
+.main-nav li {
+    height: 0em;
+	display: inline;
+}
+
+
+.main-nav a {
+    font-family: 'Red Hat Display', sans-serif;
+    font: bolder;
+    letter-spacing: 1px;
+	display: inline-block;
+	padding: 20px 20px 20px;
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+}
+
+.main-nav a:hover {
+    background-color: grey;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+}
+
+.footer {
+    display: flex;
+    color: white;
+    background-color: black;
+}
+
+.footer div {
+    margin-left: 110px;
+    margin-right: 110px;
+    line-height: 40px;
+}
+
+.footer h3 {
+    font-size: 60px;
+}
+
+.footer h4 {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.footer p {
+    font-size: 20px;
+}
