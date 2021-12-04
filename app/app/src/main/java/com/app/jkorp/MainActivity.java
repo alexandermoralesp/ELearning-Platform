@@ -22,6 +22,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         // ---------- BLOQUE PARA CONSEGUIR JSON DE CURSOS
-        final TextView textView = (TextView) findViewById(R.id.text);
         // ...
 
         // Instantiate the RequestQueue.
@@ -46,14 +46,48 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        textView.setText("Response is: "+ response);
+                        // ------------- Bloque para agregar views con los cursos
+                        ScrollView objetivo = (ScrollView) findViewById(R.id.desplazar);
+
+                        JSONParser parser = new JSONParser();
+                        JSONObject object = null;
+                        int tamano = 0;
+                        try {
+                            object = (JSONObject) parser.parse(response);
+                            tamano = Integer.parseInt(object.get("tamano").toString());
+                        } catch (ParseException e) {
+                            Toast.makeText(getApplicationContext(), "No se pudo crear json", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+
+                        if(tamano!=0){
+
+                            TextView[] cursos = new TextView[tamano];
+                            JSONArray jsonCursos = (JSONArray)object.get("curso");
+                            for (int i = 0; i<tamano; i++){
+                                cursos[i] = new TextView(getApplicationContext());
+                                JSONObject curso = (JSONObject) jsonCursos.get(i);
+                                String titulo = curso.get("titulo").toString();
+                                String descripcion = curso.get("descripcion").toString();
+                                System.out.println(titulo + descripcion);
+                                //Toast.makeText(getApplicationContext(), titulo+descripcion, Toast.LENGTH_SHORT).show();
+                                //cursos[i].setText(titulo + descripcion);
+                                String union = titulo + descripcion;
+                                cursos[i].setText(union);
+
+                                objetivo.addView(cursos[i]);
+
+                            }
+                        }
+
+
+                        //----------- ACA TERMINA
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.println(Log.ERROR,"errr",error.toString());
-                textView.setText(error.toString());
+                Toast.makeText(getApplicationContext(), "Error en la obtención de datos", Toast.LENGTH_SHORT).show();
+                //textView.setText(error.toString());
             }
         });
 
@@ -62,37 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         //----------- ACA TERMINA
 
-        // ------------- Bloque para agregar views con los cursos
-        ScrollView objetivo = (ScrollView) findViewById(R.id.desplazar);
 
-        JSONParser parser = new JSONParser();
-        JSONObject object = null;
-        int tamano = 0;
-        try {
-            object = (JSONObject) parser.parse(stringRequest.toString());
-            tamano = (int) object.get("tamano");
-        } catch (ParseException e) {
-            Toast.makeText(getApplicationContext(), "No se pudo crear json", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-
-        if(tamano!=0){
-            TextView[] cursos = new TextView[tamano];
-            JSONArray jsonCursos = (JSONArray)object.get("curso");
-            for (int i = 0; i<tamano; i++){
-                JSONObject curso = (JSONObject) jsonCursos.get(i);
-                String titulo = curso.get("titulo").toString();
-                String descripcion = curso.get("descripcion").toString();
-                cursos[i].setText(titulo + "\n" + descripcion);
-                cursos[i].setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-
-                objetivo.addView(cursos[i]);
-            }
-        }
-
-
-        //----------- ACA TERMINA
     }
 }
