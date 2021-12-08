@@ -32,6 +32,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation fileTree(dir: 'C:\\Users\\Grove\\Documents\\__UTEC__\\Grupo 4\\CS2B01\\JKorp\\app\\app\\libs', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

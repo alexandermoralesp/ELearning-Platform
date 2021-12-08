@@ -10,6 +10,7 @@ from flask_login import current_user, LoginManager
 from authlib.integrations.flask_client import OAuth
 import os
 import sys
+import json
 
 root_path = os.getcwd()
 static_path = root_path + "\\frontend\\static"
@@ -118,6 +119,16 @@ def roadmaps():
     return render_template("roadmaps.html", courses=courses, tamano=len(courses), hayUsuario=hayUsuario,
                            idUsuario=idUsuario)
 
+@app.route("/api-roadmaps", methods=['GET'])
+def api_roadmaps():
+    courses = Curso.query.all()
+    cursos_json = {"tamano": len(courses), "curso":[]}
+    curso_json = {"titulo": "", "descripcion":""}
+    for c in courses:
+        curso_json["titulo"] = c.titulo
+        curso_json["descripcion"] = c.descripcion
+        cursos_json["curso"].append(curso_json)
+    return json.dumps(cursos_json)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
