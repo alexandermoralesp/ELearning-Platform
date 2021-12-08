@@ -1,3 +1,8 @@
-<resources>
-    <string name="app_name">jkorp</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">JKorp</string>
+    <string name="title_home">Roadmaps</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="default_class_name">Class Name <xliff:g id="class_name">%s</xliff:g></string>
+    <string name="default_description">Class Description <xliff:g id="class_decription">%s</xliff:g></string>
 </resources>
