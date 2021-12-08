@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="static/icon/logo.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="static/css/dashboardstylesheet.css">
+<title>Site in construction</title>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1>
+                <a href="/">
+                <img src="static/img/JKorp.png" width="170" height="95" alt="JKorp Logo" style="position: relative; bottom: 0.8em;">
+                </a>
+            </h1>
+            <nav class="main-nav">
+                <ul>
+                    {% if hayUsuario %}
+                        <li>Bienvenido, {{ nombre }}</li>
+                    {% endif %}
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/roadmaps">Roadmaps</a>
+                    </li>
+                    <li>
+                        <li>
+                            {% if hayUsuario %}
+                            <a href="/logout" style="padding: 20px 20px 20px; border-radius: 8px; 
+                            background-color: rgba(160, 35, 56, 0.911); color: white;">
+                            Log Out
+                            </a>
+                            {% else %}
+                            <a href="/login" style="padding: 20px 20px 20px; border-radius: 8px; 
+                            background-color: rgba(160, 35, 56, 0.911); color: white;">
+                            Inicia Sesion
+                            </a>
+                            {% endif %}
+                        </li>
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {%for i in range(5)%}
+    <br>
+    {%endfor%}
+    <h1 style="text-align: center; font-family: 'Red Hat Display', sans-serif;">We're working to provide you with more services.</h1>
+    <div style="text-align: center;"><img src="static/img/construccion.png" style="text-align: center;" width="250"></div>
+
+    <div class="footer">
+        <div>
+            <h3>JKorp</h3>
+            <br><br><br><br><br><br>
+            @ 2021 JKorp
+        </div>
+        <div>
+            <h4>About</h4>
+            <p>
+                <a href="/failed" style="color: #FFF;">Careers</a> <br>
+                <a href="/failed" style="color: #FFF;">Legal Notices</a> <br>
+                <a href="/failed" style="color: #FFF;">Privacy Notices</a> <br>
+                <a href="/failed" style="color: #FFF;">Security Information</a></a><br>
+                <a href="/failed" style="color: #FFF;">Trust Center</a><br>
+            </p>
+        </div>
+        <div>
+            <h4>Support</h4>
+            <p>
+                <a href="/failed" style="color: #FFF;">Contact us</a> <br>
+                <a href="/failed" style="color: #FFF;">Customer Portal</a> <br>
+                <a href="/failed" style="color: #FFF;">Atlas Status</a> <br>
+                <a href="/failed" style="color: #FFF;">Paid Support</a> <br>
+            </p>
+        </div>
+        <div>
+            <h4>Social</h4>
+            <p>
+                <a href="/failed" style="color: #FFF;">Facebook</a> <br>
+                <a href="/failed" style="color: #FFF;">LinkedIn</a> <br>
+                <a href="/failed" style="color: #FFF;">Twitter</a> <br>
+                <a href="/failed" style="color: #FFF;">Medium</a> <br>
+                <a href="/failed" style="color: #FFF;">Github</a> <br>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -93,10 +93,9 @@ def home():
     return render_template("index.html", hayUsuario=hayUsuario, nombre=nombre)
 
 
-""" @app.route("/desktop")
-def desktop():
-    return render_template("desktop.html") """
-
+@app.route("/failed")
+def failed():
+    return render_template("construccion.html")
 
 @app.route("/roadmaps", methods=['GET', 'POST'])
 def roadmaps():

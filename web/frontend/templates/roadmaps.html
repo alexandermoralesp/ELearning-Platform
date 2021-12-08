@@ -48,9 +48,15 @@
         <h1>
             Roadmaps
         </h1>
-        <h2>
-            Newest
-        </h2>
+
+            {%if tamano==0%}
+            <br>
+            <p style="text-align: center;">There are no courses available.</p> 
+            {%else%}
+            <h2>
+                Newest
+            </h2>
+            {%endif%}
             {%for i in range(tamano)%}
                 {% if i%4 == 0 %}
                 <div class="main-division">
@@ -94,7 +100,7 @@
                 <label for="title" class="form-label"><h3>Description</h3></label>
                 <input type="text" minlength="10" class="form-control" id="description" name="description">
             </div>
-            <button type="submit" class="btn btn-primary">Create Course</button>
+            <button type="submit" class="btn btn-danger" style="background-color: brown;">Create Course</button>
           </form>
         </div>
         {% endif %}
@@ -112,30 +118,30 @@
         <div>
             <h4>About</h4>
             <p>
-                Careers <br>
-                Legal Notices <br>
-                Privacy Notices <br>
-                Security Information <br>
-                Trust Center <br>
+                <a href="/failed" style="color: #FFF;">Careers</a> <br>
+                <a href="/failed" style="color: #FFF;">Legal Notices</a> <br>
+                <a href="/failed" style="color: #FFF;">Privacy Notices</a> <br>
+                <a href="/failed" style="color: #FFF;">Security Information</a></a><br>
+                <a href="/failed" style="color: #FFF;">Trust Center</a><br>
             </p>
         </div>
         <div>
             <h4>Support</h4>
             <p>
-                Contact us <br>
-                Customer Portal <br>
-                Atlas Status <br>
-                Paid Support <br>
+                <a href="/failed" style="color: #FFF;">Contact us</a> <br>
+                <a href="/failed" style="color: #FFF;">Customer Portal</a> <br>
+                <a href="/failed" style="color: #FFF;">Atlas Status</a> <br>
+                <a href="/failed" style="color: #FFF;">Paid Support</a> <br>
             </p>
         </div>
         <div>
             <h4>Social</h4>
             <p>
-                Facebook <br>
-                LinkedIn <br>
-                Twitter <br>
-                Medium <br>
-                Github <br>
+                <a href="/failed" style="color: #FFF;">Facebook</a> <br>
+                <a href="/failed" style="color: #FFF;">LinkedIn</a> <br>
+                <a href="/failed" style="color: #FFF;">Twitter</a> <br>
+                <a href="/failed" style="color: #FFF;">Medium</a> <br>
+                <a href="/failed" style="color: #FFF;">Github</a> <br>
             </p>
         </div>
     </div>
