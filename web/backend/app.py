@@ -86,11 +86,11 @@ class Usuario(db.Model):
 @app.route("/")
 def home():
     hayUsuario = session.get('profile')
-
+    nombre = None
     if hayUsuario:
-        nombre = session['profile'][]
+        nombre = session['profile']["email"]
 
-    return render_template("index.html", hayUsuario=hayUsuario)
+    return render_template("index.html", hayUsuario=hayUsuario, nombre=nombre)
 
 
 """ @app.route("/desktop")
@@ -102,6 +102,9 @@ def desktop():
 def roadmaps():
     hayUsuario = session.get('profile')
     idUsuario = session.get('user_id')
+    nombre = None
+    if hayUsuario:
+        nombre = session['profile']["email"]
     if request.method == 'POST':
         title = request.form.get("title")
         description = request.form.get("description")
@@ -120,7 +123,7 @@ def roadmaps():
         return redirect("/roadmaps")
     courses = Curso.query.all()
     return render_template("roadmaps.html", courses=courses, tamano=len(courses), hayUsuario=hayUsuario,
-                           idUsuario=idUsuario)
+                           idUsuario=idUsuario, nombre=nombre)
 
 @app.route("/api-roadmaps", methods=['GET'])
 def api_roadmaps():
@@ -236,7 +239,7 @@ def authorize():
             print(sys.exc_info)
         finally:
             db.session.close()
-    session["profile"] = user_info
+    session["profile"] = {"email":user_info["email"]}
     session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
 
     return redirect("/")
@@ -267,7 +270,7 @@ def gitauth():
             print(sys.exc_info)
         finally:
             db.session.close()
-    session["profile"] = {"nombre": user_info['login']}
+    session["profile"] = {"email": user_info['login']}
     session["user_id"] = (Usuario.query.filter_by(email=user_info["login"]).first()).id
 
     return redirect('/')

@@ -19,6 +19,9 @@
         </h1>
         <nav class="main-nav">
             <ul>
+                {% if hayUsuario %}
+                        <li style="font-family: 'Red Hat Display', sans-serif; color:rgba(160, 35, 56, 0.911);">Bienvenido, {{ nombre }}</li>
+                {% endif %}
                 <li>
                     <a href="/">Home</a>
                 </li>
