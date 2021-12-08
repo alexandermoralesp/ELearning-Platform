@@ -87,6 +87,9 @@ class Usuario(db.Model):
 def home():
     hayUsuario = session.get('profile')
 
+    if hayUsuario:
+        nombre = session['profile'][]
+
     return render_template("index.html", hayUsuario=hayUsuario)
 
 
@@ -264,7 +267,7 @@ def gitauth():
             print(sys.exc_info)
         finally:
             db.session.close()
-    session["profile"] = user_info
+    session["profile"] = {"nombre": user_info['login']}
     session["user_id"] = (Usuario.query.filter_by(email=user_info["login"]).first()).id
 
     return redirect('/')
