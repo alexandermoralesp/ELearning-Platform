@@ -112,6 +112,13 @@ img {
     background-size: 270px 56px;
 }
 
+#github {
+    display:block;
+    border: none;
+    background: url('gitlogin.jfif') no-repeat bottom;
+    background-size: 270px 40px;
+}
+
 .leftmargin {
     margin-left: 50px;
     margin-bottom: -60px;

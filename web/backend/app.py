@@ -37,6 +37,18 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'}
 )
 
+github = oauth.register(
+    name='github',
+    client_id="Iv1.06e52ba8e94af6d7",
+    client_secret="986dc17d6604647dbacb6563a916c2e81539de2f",
+    access_token_url='https://github.com/login/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    authorize_params=None,
+    api_base_url='https://api.github.com/',
+    client_kwargs={'scope': 'user:email'},
+)
+
 lg_manager = LoginManager(app)
 
 
@@ -225,6 +237,39 @@ def authorize():
     session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
 
     return redirect("/")
+
+@app.route("/gitlogin")
+def gitlogin():
+    redirect_url = url_for("gitauth", _external=True)
+    return github.authorize_redirect(redirect_url)
+
+@app.route("/gitauth")
+def gitauth():
+    token = github.authorize_access_token()
+    resp = github.get('user', token=token)
+    user_info = resp.json()
+
+    user = Usuario.query.filter_by(email=user_info["login"]).first()
+    if not user:
+        obj = Usuario(
+            email=user_info["login"],
+            password=generate_password_hash(str(user_info["id"]), method='sha256'),
+            first_name=user_info["login"]
+        )
+        try:
+            db.session.add(obj)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
+    session["profile"] = user_info
+    session["user_id"] = (Usuario.query.filter_by(email=user_info["login"]).first()).id
+
+    return redirect('/')
+
+
 
 
 if __name__ == "__main__":

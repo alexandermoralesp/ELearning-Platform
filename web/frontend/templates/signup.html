@@ -12,7 +12,7 @@
     <div class="body-left"></div>
     <div class="body-right">
       <a href ="/"><img src="static/img/JKorp.png" width="170" height="95" alt="JKorp Logo"></a>
-      <form method="POST">
+      <form name="formSignUp" method="POST" onsubmit="encryptForm()">
         <h3>Crea tu cuenta</h3>
         
         <div class="form-group">
@@ -65,5 +65,16 @@
         {% endif %}
       </form>
     </div>
+
+
+    <!-- ACA SE IMPORTAN LAS LIBRERÍAS DE HASHEO (NO ES ENCRIPCIÓN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script>
+      function encryptForm(){
+        document.formSignUp.password1.value = CryptoJS.MD5(document.formSignUp.password1.value);
+        document.formSignUp.password2.value = CryptoJS.MD5(document.formSignUp.password2.value);
+      }
+    </script>
+
   </body> 
 </html>
