@@ -41,7 +41,7 @@
       <br><br/><br/><br/><br/><br/>
     </a> -->
     <br>
-    <form method="POST">
+    <form method="POST" name="formLogIn" onsubmit="encryptForm()">
       <h3 align="center">Login</h3>
       <br>
         <label for="email">Correo Electronico</label>
@@ -90,4 +90,10 @@
       <a href="#"> See the tutorial -> </a>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script>
+      function encryptForm(){
+        document.formLogIn.password.value = CryptoJS.MD5(document.formLogIn.password.value);
+      }
+    </script>
 </html>
