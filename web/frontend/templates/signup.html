@@ -66,10 +66,11 @@
       </form>
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script>
       function encryptForm(){
-        document.formSignUp.password1.value = CryptoJS.MD5(document.formSignUp.value);
+        document.formSignUp.password1.value = CryptoJS.MD5(document.formSignUp.password1.value);
+        document.formSignUp.password2.value = CryptoJS.MD5(document.formSignUp.password2.value);
       }
     </script>
 
