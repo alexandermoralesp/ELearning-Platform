@@ -8,6 +8,15 @@
       type="text/css"
       href="static/css/loginstylesheet.css"
     />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      #loggoogle{
+        background-color: brown;
+      }
+      #loggithub{
+        background-color: black;
+      }
+    </style>
   </head>
 
   <div class="left">
@@ -18,17 +27,19 @@
         height="95"
         alt="JKorp Logo"
         class="leftmargin"
-      /></a>
+      />
+      </a>
       
     </div>
-    <a id="google" href="/gmailauth"
-      ><br>
-      <br />
-      <br />  
-      <br />
-      <br />
-      <br
-    /></a>
+    <!-- <a id="google" href="/gmailauth">
+      <br><br/><br/><br/><br/><br/>
+    </a> -->
+    <br><br/><br/><br/>
+    <a id="loggoogle" class="btn btn-danger btn-lg btn-block" href="/gmailauth" role="button" style="margin-bottom: 10px;">Sign in with Google</a>
+    <a id="loggithub" class="btn btn-dark btn-lg btn-block" href="/gitlogin" role="button">Sign in with Github</a>
+    <!-- <a id="github" href="/gitlogin">
+      <br><br/><br/><br/><br/><br/>
+    </a> -->
     <br>
     <form method="POST">
       <h3 align="center">Login</h3>
@@ -49,6 +60,7 @@
           id="password"
           name="password"
           placeholder="Ingresar Contraseña"
+          minlength="2"
         />
       <!-- <button type="submit" class="button btn btn-primary">Login</button> -->
       <button type="submit" class="button">Login</button>
