@@ -5,17 +5,25 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/class_img_view.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/gradient_animation.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/gradient_center.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/gradient_end.xml" value="0.3260416666666667" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.321025641025641" />
+        <entry key="app/src/main/res/drawable/roundbtn.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/layout/activity_description.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_desktop.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_loading.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/class_img_view.xml" value="0.16770833333333332" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2039141414141414" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/load_screen.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/new_class.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/new_class.xml" value="0.33" />
         <entry key="app/src/main/res/layout/new_class_layout.xml" value="0.18" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3098958333333333" />
       </map>

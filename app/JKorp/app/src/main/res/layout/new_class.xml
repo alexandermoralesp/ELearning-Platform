@@ -24,34 +24,37 @@
                 android:id="@+id/imageView"
                 android:layout_width="78dp"
                 android:layout_height="75dp"
-                app:srcCompat="@android:drawable/ic_menu_save"
+                android:src="@drawable/image_2"
                 tools:ignore="MissingConstraints" />
 
             <TextView
+                android:fontFamily="@font/amiko"
                 android:id="@+id/decription_class_id"
-                android:layout_width="268dp"
-                android:layout_height="43dp"
-                android:layout_marginStart="76dp"
+                android:layout_width="256dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="88dp"
                 android:layout_marginTop="36dp"
                 android:text="@string/default_description"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/black"
                 tools:ignore="MissingConstraints" />
 
             <TextView
+                android:fontFamily="@font/amiko"
                 android:id="@+id/title_class_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
+                android:layout_marginStart="88dp"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/black"
                 android:text="@string/default_class_name"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <Button
+                android:fontFamily="@font/amiko"
                 android:id="@+id/button"
                 android:layout_width="61dp"
                 android:layout_height="28dp"

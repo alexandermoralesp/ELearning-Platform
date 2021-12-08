@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="rouge">#721111</color>
     <color name="grey">#EDEDE5</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="colorGradientStart">#D9FF43</color>
+    <color name="colorGradientCenter">#F67831</color>
+    <color name="colorGradientEnd">#FF1493</color>
 
 </resources>

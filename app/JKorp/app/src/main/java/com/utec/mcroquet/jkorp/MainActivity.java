@@ -77,20 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    public void startProgress()
-    {
-        for (value = 0; value < 100; value = value + 1)
-        {
-            try {
-                Thread.sleep(51);
-                progressBar.setProgress(value);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
+
 
     class Course{
         private String name;
