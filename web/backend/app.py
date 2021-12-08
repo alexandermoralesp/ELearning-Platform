@@ -36,6 +36,18 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'}
 )
 
+github = oauth.register(
+    name='github',
+    client_id=getenv("Iv1.06e52ba8e94af6d7"),
+    client_secret=getenv("986dc17d6604647dbacb6563a916c2e81539de2f"),
+    access_token_url='https://github.com/login/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    authorize_params=None,
+    api_base_url='https://api.github.com/',
+    client_kwargs={'scope': 'user:email'},
+)
+
 lg_manager = LoginManager(app)
 
 
@@ -214,6 +226,10 @@ def authorize():
     session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
 
     return redirect("/")
+
+@app.route("/gitauth")
+def gitauth():
+
 
 
 if __name__ == "__main__":
