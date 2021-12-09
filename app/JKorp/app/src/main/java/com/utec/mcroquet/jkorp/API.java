@@ -17,6 +17,7 @@ import okhttp3.Response;
 
 public class API {
     final OkHttpClient client = new OkHttpClient();
+
     // Funcion declarar
     void run(String url, TextView text) throws IOException {
         Request request = new Request.Builder()

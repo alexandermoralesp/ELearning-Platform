@@ -76,11 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View buttonView = getLayoutInflater().inflate(R.layout.new_class, null, false);
             View gap = getLayoutInflater().inflate(R.layout.new_class_layout, null, false);
 
-            TextView changeClassName = buttonView.findViewById(R.id.title_class_id);
+            TextView chandsageClassName = buttonView.findViewById(R.id.title_class_id);
             TextView changeDescName = buttonView.findViewById(R.id.decription_class_id);
 
 
-            changeClassName.setText(classes.get(i).getName());
             changeDescName.setText(classes.get(i).getDescription());
 
             classLayout.addView(buttonView);
