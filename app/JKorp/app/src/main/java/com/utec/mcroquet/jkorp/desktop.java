@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.utec.mcroquet.jkorp.ui.dashboard.DashboardFragment;
+import com.utec.mcroquet.jkorp.ui.login.LoginActivity;
 
 public class desktop extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class desktop extends AppCompatActivity {
     }
 
     public void goToDescription(View view) {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
