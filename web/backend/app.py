@@ -16,7 +16,8 @@ root_path = os.getcwd()
 static_path = root_path + "\\frontend\\static"
 template_path = root_path + "\\frontend\\templates"
 app = Flask(__name__, static_folder=static_path, template_folder=template_path)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:root@localhost:5432/jkorp"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://alexander@localhost:5432/jkorp"
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['SECRET_KEY'] = 'JKORP2021'
