@@ -19,22 +19,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.utec.mcroquet.jkorp.databinding.ActivityMainBinding;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import okhttp3.*;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private ActivityMainBinding binding;
-    // Textview for API
-    private TextView requestView;
 
-    LinearLayout classLayout; // Allows scroll
+    private ActivityMainBinding binding;
+
+    ProgressBar progressBar;
+    LinearLayout classLayout;
+    int value;
     Button addClass;
     Vector<Course> classes = new Vector<>(0);
 
@@ -42,19 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // API
-        requestView = findViewById(R.id.request);
-
-        API newAPI = new API();
-        try {
-            newAPI.run("http://190.236.90.211:25565/api-roadmaps", requestView);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -76,16 +64,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View buttonView = getLayoutInflater().inflate(R.layout.new_class, null, false);
             View gap = getLayoutInflater().inflate(R.layout.new_class_layout, null, false);
 
-            TextView chandsageClassName = buttonView.findViewById(R.id.title_class_id);
+            TextView changeClassName = buttonView.findViewById(R.id.title_class_id);
             TextView changeDescName = buttonView.findViewById(R.id.decription_class_id);
 
 
+            changeClassName.setText(classes.get(i).getName());
             changeDescName.setText(classes.get(i).getDescription());
 
             classLayout.addView(buttonView);
             classLayout.addView(gap);
         }
+
     }
+
+
     class Course{
         private String name;
         private String description;

@@ -37,7 +37,7 @@ public class loading extends AppCompatActivity {
         for (value = 0; value < 100; value = value + 1)
         {
             try {
-                Thread.sleep(51);
+                Thread.sleep(65);
                 progressBar.setProgress(value);
             }
             catch (InterruptedException e)

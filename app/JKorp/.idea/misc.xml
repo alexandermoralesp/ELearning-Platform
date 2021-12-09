@@ -3,19 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/drawable/gradient.xml" value="0.2833333333333333" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/drawable/gradient_center.xml" value="0.2833333333333333" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/drawable/gradient_end.xml" value="0.2833333333333333" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/activity_desktop.xml" value="0.5" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/activity_loading.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/fragment_dashboard.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/fragment_notifications.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/load_screen.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/new_class.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/layout/new_class_layout.xml" value="0.3625" />
-        <entry key="..\:/UTEC/DBP/project/JKorp/app/JKorp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3625" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.321025641025641" />
         <entry key="app/src/main/res/drawable/class_img_view.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.3260416666666667" />
