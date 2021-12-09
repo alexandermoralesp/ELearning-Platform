@@ -49,6 +49,18 @@ github = oauth.register(
     client_kwargs={'scope': 'user:email'},
 )
 
+facebook = oauth.register(
+    name='facebook',
+    client_id="269819345173579",
+    client_secret="1568ccee2e4631cb60daf3cf21422e2d",
+    access_token_url='https://graph.facebook.com/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    authorize_params=None,
+    api_base_url='https://graph.facebook.com/',
+    client_kwargs={'scope': 'email'},
+)
+
 lg_manager = LoginManager(app)
 
 
@@ -247,6 +259,21 @@ def authorize():
 def gitlogin():
     redirect_url = url_for("gitauth", _external=True)
     return github.authorize_redirect(redirect_url)
+
+@app.route("/facebooklogin")
+def facebooklogin():
+    redirect_url = url_for("facebookauth", _external=True)
+    return facebook.authorize_redirect(redirect_url)
+
+@app.route("/facebookauth")
+def facebookauth():
+    token = github.authorize_access_token()
+    resp = github.get('user', token=token)
+    user_info = resp.json()
+
+    print(user_info)
+
+    return redirect('/')
 
 @app.route("/gitauth")
 def gitauth():
