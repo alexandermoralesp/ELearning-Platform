@@ -16,9 +16,12 @@
       #loggithub{
         background-color: black;
       }
+      #logfacebook{
+        background-color: rgb(3, 0, 155);
+      }
     </style>
   </head>
-
+  <body>
   <div class="left">
     <div>
       <a href="/"><img
@@ -37,11 +40,12 @@
     <br><br/><br/><br/>
     <a id="loggoogle" class="btn btn-danger btn-lg btn-block" href="/gmailauth" role="button" style="margin-bottom: 10px;">Sign in with Google</a>
     <a id="loggithub" class="btn btn-dark btn-lg btn-block" href="/gitlogin" role="button">Sign in with Github</a>
+    <a id="logfacebook" class="btn btn-primary btn-lg btn-block" href="/facebooklogin" role="button">Sign in with Facebook</a>
     <!-- <a id="github" href="/gitlogin">
       <br><br/><br/><br/><br/><br/>
     </a> -->
     <br>
-    <form method="POST">
+    <form method="POST" name="formLogIn" onsubmit="encryptForm()">
       <h3 align="center">Login</h3>
       <br>
         <label for="email">Correo Electronico</label>
@@ -87,7 +91,15 @@
         Convallis neque, odio accumsan non<br />
         sed morbi cursus eget leo.
       </p>
-      <a href="#"> See the tutorial -> </a>
+      <a href="/failed"> See the tutorial -> </a>
     </div>
   </div>
+
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script>
+      function encryptForm(){
+        document.formLogIn.password.value = CryptoJS.MD5(document.formLogIn.password.value);
+      }
+    </script>
 </html>

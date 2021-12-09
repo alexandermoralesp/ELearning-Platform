@@ -1,0 +1,42 @@
+CREATE TABLE IF NOT EXISTS Users(
+	id SERIAL,
+	username VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	type_account INT NOT NULL
+);
+ALTER TABLE Users ADD CONSTRAINT "users_pk" PRIMARY KEY (id);
+
+CREATE TABLE IF NOT EXISTS Students(
+	id SERIAL,
+	name VARCHAR(50) NOT NULL,
+	lastName VARCHAR(50) NOT NULL,
+	country VARCHAR(50) NOT NULL
+);
+ALTER TABLE Students ADD CONSTRAINT "students_pk" PRIMARY KEY (id);
+ALTER TABLE Students ADD CONSTRAINT "teachers_fk" FOREIGN KEY id REFERENCES Users (id) ;
+CREATE TABLE IF NOT EXISTS Teachers(
+	id SERIAL,
+	name VARCHAR(50) NOT NULL,
+	lastName VARCHAR(50) NOT NULL,
+	country VARCHAR(50) NOT NULL,
+	description VARCHAR(50) NOT NULL,
+);
+ALTER TABLE Teachers ADD CONSTRAINT "teachers_pk" PRIMARY KEY (id);
+ALTER TABLE Teachers ADD CONSTRAINT "teachers_fk" FOREIGN KEY id REFERENCES Users (id) ;
+
+CREATE TABLE IF NOT EXISTS Courses(
+	title VARCHAR(50) NOT NULL,
+	description VARCHAR(50) NOT NULL,
+	hours FLOAT NOT NULL,
+	description VARCHAR(50) NOT NULL,
+	teacher_id SERIAL
+);
+
+CREATE TABLE IF NOT EXISTS Students_Courses(
+	student_id SERIAL REFERENCES Students (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	course_id SERIAL REFERENCES Courses (id) ON UPDATE CASCADE ON DELETE CASCADE
+	CONSTRAINT student_course_pk PRIMARY KEY (student_id, course_id)
+);
+
+
+

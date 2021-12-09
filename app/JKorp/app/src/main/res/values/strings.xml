@@ -1,0 +1,21 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">JKorp</string>
+    <string name="title_home">Roadmaps</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="default_class_name">Class Name <xliff:g id="class_name">%s</xliff:g></string>
+    <string name="default_description">Class Description <xliff:g id="class_decription">%s</xliff:g></string>
+    <string name="welcome">Learn More, learn ORACLE</string>
+    <string name="login">LOG IN</string>
+    <string name="signin">SIGN IN</string>
+    <string name='lorem1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Proin ut molestie tortor, ut ultricies eros.</string>
+    <string name='lorem2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Proin ut molestie tortor, ut ultricies eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Proin ut molestie tortor, ut ultricies eros.</string>
+    <string name="startcourse">Go to Roadmaps to Start!</string>
+    <string name="learn">What will you learn?</string>
+    <string name="coursestruct">Course Structure</string>
+    <string name="somecourses">Some of our courses</string>
+
+</resources>

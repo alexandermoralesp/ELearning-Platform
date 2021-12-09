@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Init layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <!-- TextView JKorp logo initialization-->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:text="JKorp"
+        android:textAlignment="center"
+        android:textColor="#D1004D"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+    <!-- Progress Bar to initilize -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:progressTint="#D1004D" />
+</LinearLayout>

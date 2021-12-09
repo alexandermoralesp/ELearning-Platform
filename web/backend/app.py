@@ -10,6 +10,7 @@ from flask_login import current_user, LoginManager
 from authlib.integrations.flask_client import OAuth
 import os
 import sys
+import json
 
 root_path = os.getcwd()
 static_path = root_path + "\\frontend\\static"
@@ -46,6 +47,18 @@ github = oauth.register(
     authorize_params=None,
     api_base_url='https://api.github.com/',
     client_kwargs={'scope': 'user:email'},
+)
+
+facebook = oauth.register(
+    name='facebook',
+    client_id="1448410368888532",
+    client_secret="dbf3c2c434dc1ae5828a72bcb9f19f90",
+    access_token_url='https://graph.facebook.com/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    authorize_params=None,
+    api_base_url='https://graph.facebook.com/',
+    client_kwargs={'scope': 'email'},
 )
 
 lg_manager = LoginManager(app)
@@ -85,19 +98,24 @@ class Usuario(db.Model):
 @app.route("/")
 def home():
     hayUsuario = session.get('profile')
+    nombre = None
+    if hayUsuario:
+        nombre = session['profile']["email"]
 
-    return render_template("index.html", hayUsuario=hayUsuario)
+    return render_template("index.html", hayUsuario=hayUsuario, nombre=nombre)
 
 
-""" @app.route("/desktop")
-def desktop():
-    return render_template("desktop.html") """
-
+@app.route("/failed")
+def failed():
+    return render_template("construccion.html")
 
 @app.route("/roadmaps", methods=['GET', 'POST'])
 def roadmaps():
     hayUsuario = session.get('profile')
     idUsuario = session.get('user_id')
+    nombre = None
+    if hayUsuario:
+        nombre = session['profile']["email"]
     if request.method == 'POST':
         title = request.form.get("title")
         description = request.form.get("description")
@@ -116,8 +134,18 @@ def roadmaps():
         return redirect("/roadmaps")
     courses = Curso.query.all()
     return render_template("roadmaps.html", courses=courses, tamano=len(courses), hayUsuario=hayUsuario,
-                           idUsuario=idUsuario)
+                           idUsuario=idUsuario, nombre=nombre)
 
+@app.route("/api-roadmaps", methods=['GET'])
+def api_roadmaps():
+    courses = Curso.query.all()
+    cursos_json = {"tamano": len(courses), "curso":[]}
+    curso_json = {"titulo": "", "descripcion":""}
+    for c in courses:
+        curso_json["titulo"] = c.titulo
+        curso_json["descripcion"] = c.descripcion
+        cursos_json["curso"].append(curso_json)
+    return json.dumps(cursos_json)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -222,7 +250,7 @@ def authorize():
             print(sys.exc_info)
         finally:
             db.session.close()
-    session["profile"] = user_info
+    session["profile"] = {"email":user_info["email"]}
     session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
 
     return redirect("/")
@@ -231,6 +259,36 @@ def authorize():
 def gitlogin():
     redirect_url = url_for("gitauth", _external=True)
     return github.authorize_redirect(redirect_url)
+
+@app.route("/facebooklogin")
+def facebooklogin():
+    redirect_url = url_for("facebookauth", _external=True)
+    return facebook.authorize_redirect(redirect_url)
+
+@app.route("/facebookauth")
+def facebookauth():
+    token = oauth.facebook.authorize_access_token()
+    resp = oauth.facebook.get('https://graph.facebook.com/me?fields=id,name,email,picture{url}')
+    user_info = resp.json()
+    user = Usuario.query.filter_by(email=user_info["email"]).first()
+    if not user:
+        obj = Usuario(
+            email=user_info["email"],
+            password=generate_password_hash(user_info["id"], method='sha256'),
+            first_name=user_info["name"]
+        )
+        try:
+            db.session.add(obj)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
+    session["profile"] = {"email":user_info["email"]}
+    session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
+
+    return redirect('/')
 
 @app.route("/gitauth")
 def gitauth():
@@ -253,7 +311,7 @@ def gitauth():
             print(sys.exc_info)
         finally:
             db.session.close()
-    session["profile"] = user_info
+    session["profile"] = {"email": user_info['login']}
     session["user_id"] = (Usuario.query.filter_by(email=user_info["login"]).first()).id
 
     return redirect('/')
