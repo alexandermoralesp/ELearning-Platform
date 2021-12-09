@@ -20,6 +20,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.utec.mcroquet.jkorp.databinding.ActivityMainBinding;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActivityMainBinding binding;
     // Textview for API
     private TextView requestView;
-
     LinearLayout classLayout; // Allows scroll
     Button addClass;
     Vector<Course> classes = new Vector<>(0);
@@ -47,15 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(binding.getRoot());
 
         // API
-        requestView = findViewById(R.id.request);
-
+//        requestView = findViewById(R.id.request);
         API newAPI = new API();
         try {
             newAPI.run("http://190.236.90.211:25565/api-roadmaps", requestView);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

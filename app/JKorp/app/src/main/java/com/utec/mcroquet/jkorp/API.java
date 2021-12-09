@@ -1,6 +1,7 @@
 package com.utec.mcroquet.jkorp;
 
 import android.util.JsonReader;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,8 +36,9 @@ public class API {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful())
                 {
-                    final String myResponse = response.body().string();
-                    text.setText(myResponse);
+                    Log.i("prueba", response.body().string());
+                    final String myResponse = response.body().toString();
+
                 }
             }
         });
