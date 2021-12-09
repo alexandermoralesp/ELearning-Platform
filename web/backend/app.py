@@ -49,6 +49,18 @@ github = oauth.register(
     client_kwargs={'scope': 'user:email'},
 )
 
+facebook = oauth.register(
+    name='facebook',
+    client_id="1448410368888532",
+    client_secret="dbf3c2c434dc1ae5828a72bcb9f19f90",
+    access_token_url='https://graph.facebook.com/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    authorize_params=None,
+    api_base_url='https://graph.facebook.com/',
+    client_kwargs={'scope': 'email'},
+)
+
 lg_manager = LoginManager(app)
 
 
@@ -247,6 +259,36 @@ def authorize():
 def gitlogin():
     redirect_url = url_for("gitauth", _external=True)
     return github.authorize_redirect(redirect_url)
+
+@app.route("/facebooklogin")
+def facebooklogin():
+    redirect_url = url_for("facebookauth", _external=True)
+    return facebook.authorize_redirect(redirect_url)
+
+@app.route("/facebookauth")
+def facebookauth():
+    token = oauth.facebook.authorize_access_token()
+    resp = oauth.facebook.get('https://graph.facebook.com/me?fields=id,name,email,picture{url}')
+    user_info = resp.json()
+    user = Usuario.query.filter_by(email=user_info["email"]).first()
+    if not user:
+        obj = Usuario(
+            email=user_info["email"],
+            password=generate_password_hash(user_info["id"], method='sha256'),
+            first_name=user_info["name"]
+        )
+        try:
+            db.session.add(obj)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print(sys.exc_info)
+        finally:
+            db.session.close()
+    session["profile"] = {"email":user_info["email"]}
+    session["user_id"] = (Usuario.query.filter_by(email=user_info["email"]).first()).id
+
+    return redirect('/')
 
 @app.route("/gitauth")
 def gitauth():

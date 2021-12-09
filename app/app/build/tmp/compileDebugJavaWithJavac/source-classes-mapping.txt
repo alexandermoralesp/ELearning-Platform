@@ -1,0 +1,8 @@
+com/app/jkorp/databinding/ActivityMainBinding.java
+ com.app.jkorp.databinding.ActivityMainBinding
+com/app/jkorp/BuildConfig.java
+ com.app.jkorp.BuildConfig
+com/app/jkorp/MainActivity.java
+ com.app.jkorp.MainActivity
+ com.app.jkorp.MainActivity$1
+ com.app.jkorp.MainActivity$2
